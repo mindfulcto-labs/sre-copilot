@@ -1,0 +1,31 @@
+# Restart a service that is down or crash-looping, then verify recovery.
+# The service name comes from the alert via SRE_ALERT_SERVICE.
+name: service-restart
+description: Restart the affected service and verify it comes back healthy.
+category: availability
+steps:
+  - name: check-service-status
+    type: command
+    command: systemctl status "$SRE_ALERT_SERVICE" --no-pager || true
+
+  - name: capture-recent-logs
+    type: command
+    command: journalctl -u "$SRE_ALERT_SERVICE" -n 50 --no-pager || true
+
+  - name: restart-service
+    type: command
+    command: systemctl restart "$SRE_ALERT_SERVICE"
+    mutating: true
+
+  - name: wait-for-service-to-settle
+    type: wait
+    seconds: 5
+
+  - name: verify-service-active
+    type: verify
+    command: systemctl is-active --quiet "$SRE_ALERT_SERVICE"
+
+  - name: check-health-endpoint
+    type: http_check
+    url: http://localhost:8080/healthz
+    expected_status: 200

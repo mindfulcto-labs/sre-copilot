@@ -1,0 +1,27 @@
+# Renew a TLS certificate that has expired or is close to expiry.
+# The host name comes from the alert via SRE_ALERT_SERVICE.
+name: certificate-expiry
+description: Inspect, renew and verify the TLS certificate for the affected host.
+category: certificate
+steps:
+  - name: show-certificate-expiry-date
+    type: command
+    command: >-
+      echo | openssl s_client -connect "$SRE_ALERT_SERVICE:443" -servername
+      "$SRE_ALERT_SERVICE" 2>/dev/null | openssl x509 -noout -enddate
+
+  - name: renew-certificate
+    type: command
+    command: certbot renew --cert-name "$SRE_ALERT_SERVICE"
+    mutating: true
+
+  - name: reload-web-server
+    type: command
+    command: systemctl reload nginx
+    mutating: true
+
+  - name: verify-at-least-14-days-validity
+    type: verify
+    command: >-
+      echo | openssl s_client -connect "$SRE_ALERT_SERVICE:443" -servername
+      "$SRE_ALERT_SERVICE" 2>/dev/null | openssl x509 -noout -checkend 1209600

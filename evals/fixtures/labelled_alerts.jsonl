@@ -1,0 +1,15 @@
+{"expected_category": "disk", "alert": {"source": "prometheus", "severity": "warning", "service": "orders-db", "message": "Disk usage 92% on /data, filesystem filling fast", "labels": {"env": "prod"}}}
+{"expected_category": "disk", "alert": {"source": "node-exporter", "severity": "critical", "service": "wal-writer", "message": "No space left on device when writing WAL segment", "labels": {"env": "prod"}}}
+{"expected_category": "disk", "alert": {"source": "node-exporter", "severity": "warning", "service": "docker-host-2", "message": "Inode exhaustion on /var/lib/docker", "labels": {"env": "staging"}}}
+{"expected_category": "availability", "alert": {"source": "grafana", "severity": "critical", "service": "checkout-api", "message": "Service unreachable, connection refused on port 8080", "labels": {"env": "prod"}}}
+{"expected_category": "availability", "alert": {"source": "kubernetes", "severity": "critical", "service": "basket-api", "message": "Pod basket-api-7f9 is in CrashLoopBackOff", "labels": {"env": "prod", "namespace": "shop"}}}
+{"expected_category": "availability", "alert": {"source": "pingdom", "severity": "critical", "service": "www", "message": "Healthcheck failing with 503 from two regions", "labels": {"env": "prod"}}}
+{"expected_category": "certificate", "alert": {"source": "blackbox-exporter", "severity": "warning", "service": "shop.example.com", "message": "TLS certificate expires in 3 days", "labels": {"env": "prod"}}}
+{"expected_category": "certificate", "alert": {"source": "blackbox-exporter", "severity": "critical", "service": "api.example.com", "message": "x509 certificate expired, handshake failing", "labels": {"env": "prod"}}}
+{"expected_category": "memory", "alert": {"source": "kubernetes", "severity": "critical", "service": "search-indexer", "message": "OOMKilled: container exceeded memory limit", "labels": {"env": "prod"}}}
+{"expected_category": "memory", "alert": {"source": "app-metrics", "severity": "warning", "service": "reporting", "message": "Heap usage above 95 percent and swap in use", "labels": {"env": "staging"}}}
+{"expected_category": "latency", "alert": {"source": "prometheus", "severity": "warning", "service": "payments-api", "message": "p99 latency above 2s, outside the SLO", "labels": {"env": "prod"}}}
+{"expected_category": "latency", "alert": {"source": "app-metrics", "severity": "warning", "service": "invoice-worker", "message": "Response time slow and queue depth rising", "labels": {"env": "prod"}}}
+{"expected_category": "network", "alert": {"source": "prometheus", "severity": "warning", "service": "service-mesh", "message": "DNS resolution failures and packet loss between zones", "labels": {"env": "prod"}}}
+{"expected_category": "unknown", "alert": {"source": "cron", "severity": "info", "service": "backup-job", "message": "Nightly backup finished later than usual", "labels": {"env": "prod"}}}
+{"expected_category": "unknown", "alert": {"source": "ci", "severity": "info", "service": "deploy-pipeline", "message": "Deployment pipeline paused for manual review", "labels": {"env": "staging"}}}

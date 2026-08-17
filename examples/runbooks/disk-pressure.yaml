@@ -1,0 +1,22 @@
+# Reclaim disk space on a host reporting disk pressure.
+# Diagnostic steps run freely; the cleanup step is gated behind approval.
+name: disk-pressure
+description: Diagnose and relieve disk pressure on the affected host.
+category: disk
+steps:
+  - name: show-disk-usage
+    type: command
+    command: df -h
+
+  - name: list-largest-log-files
+    type: command
+    command: du -sh /var/log/* 2>/dev/null | sort -rh | head -10 || true
+
+  - name: vacuum-journal-logs
+    type: command
+    command: journalctl --vacuum-size=500M
+    mutating: true
+
+  - name: confirm-root-usage-below-90-percent
+    type: verify
+    command: test "$(df -P / | awk 'NR==2 {print $5}' | tr -d '%')" -lt 90

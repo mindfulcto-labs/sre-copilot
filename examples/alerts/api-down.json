@@ -1,0 +1,10 @@
+{
+  "source": "grafana",
+  "severity": "critical",
+  "service": "checkout-api",
+  "message": "Health check failing: checkout-api is down, connection refused on port 8080",
+  "labels": {
+    "env": "prod",
+    "region": "eu-west-1"
+  }
+}

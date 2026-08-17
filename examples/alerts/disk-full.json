@@ -1,0 +1,11 @@
+{
+  "source": "prometheus",
+  "severity": "critical",
+  "service": "payments-api",
+  "message": "Filesystem /var is 96% full on host payments-api-3, disk pressure eviction imminent",
+  "labels": {
+    "env": "prod",
+    "host": "payments-api-3",
+    "mountpoint": "/var"
+  }
+}

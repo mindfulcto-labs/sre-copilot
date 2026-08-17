@@ -1,0 +1,10 @@
+{
+  "source": "blackbox-exporter",
+  "severity": "warning",
+  "service": "shop.example.com",
+  "message": "TLS certificate for shop.example.com expires in 6 days",
+  "labels": {
+    "env": "prod",
+    "probe": "https"
+  }
+}
